@@ -1,0 +1,39 @@
+name: CVE report publish
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  push:
+    branches:
+      - WFLY-18570
+
+jobs:
+  fetch-cve-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch CVE Data
+        run: |
+          curl -o cve-data.yaml -L https://raw.githubusercontent.com/RanabirChakraborty/wildfly/WFLY-18570/cve_details/cve.yml
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Modify CVE Data
+        run: |
+          echo "cve-data.yaml" >> _data/releases.yml
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "RanabirChakraborty"
+          git config user.email "rchakrab@redhat.com"
+          git add _data/releases.yml
+          git commit -m "Update CVE data"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: update-cve-data
+          base: WFLY-18570
+          title: Update CVE data
+          body: Automated update of CVE data
