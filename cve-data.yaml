@@ -1,0 +1,19 @@
+- CVE: CVE-XXXX-XXXX
+  Link: http://example.com/cve-link
+  Status: Closed
+  JIRA Link: http://example.com/jira-link
+  Fix Version(s):
+    - Version 1.0
+    - Version 1.1
+  Notes: |
+    This is a free-form note about the CVE.
+
+- CVE: CVE-YYYY-YYYY
+  Link: http://example.com/another-cve-link
+  Status: Resolved
+  JIRA Link: http://example.com/jira-link
+  Fix Version(s):
+    - Version 1.0
+    - Version 1.1
+  Notes: |
+    This CVE has been resolved.
